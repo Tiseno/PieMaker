@@ -1,7 +1,7 @@
 import R from 'ramda'
 import React, { Component } from 'react'
 
-const PieChart = require('react-d3/piechart').PieChart;
+const PieChart = require('react-d3/piechart').PieChart
 
 export default class PieChartMaker extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ export default class PieChartMaker extends Component {
                 height: 400,
                 radius: 100,
                 innerRadius: 20,
-                title: "This is my Pie Chart"
+                title: "Pie Chart"
             },
             input: {
                 label: "",
@@ -65,20 +65,28 @@ export default class PieChartMaker extends Component {
         return (
             <div className='content pie-maker light'>
                 <div className='controls'>
-                <div>
-                <input type="text" onChange={this.setInputLabel.bind(this)} value={this.state.input.label}/>
-                <input type="number" min="0" max="100" onChange={this.setInputValue.bind(this)} value={this.state.input.value}/>
-                <button onClick={() => {this.addSlice()}}>Add Slice!</button>
-                </div>
-                <div>
-                <input type="text" onChange={this.setInputTitle.bind(this)} value={this.state.pieChart.title}/>
-                </div>
-                <div>
-                <button onClick={() => {this.resetChart()}}>Reset</button>
-                </div>
+                    <div>
+                        <input type="text"
+                                onChange={this.setInputLabel.bind(this)}
+                                value={this.state.input.label}/>
+                        <input type="number" min="0" max="100"
+                                onChange={this.setInputValue.bind(this)}
+                                value={this.state.input.value}/>
+                        <button onClick={() => {this.addSlice()}}>
+                            Add Slice!
+                        </button>
+                    </div>
+                    <div>
+                        <input type="text" onChange={this.setInputTitle.bind(this)} value={this.state.pieChart.title}/>
+                    </div>
+                    <div>
+                        <button onClick={() => {this.resetChart()}}>
+                            Reset
+                        </button>
+                    </div>
                 </div>
                 <PieChart className='chart' {...this.state.pieChart}/>
-                </div>
+            </div>
         );
     }
 }
