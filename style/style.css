@@ -1,9 +1,11 @@
 * {
+    font-size: 30px;
     font-family: 'Roboto', sans-serif;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
 }
+
 body {
-    margin: 0;
-    padding: 0;
     top: 0;
     left: 0;
     width: 100%;
@@ -18,20 +20,21 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .content {
+    margin-top: 30px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .header {
     width: 100%;
-    height: 50px;
+    height: 90px;
     flex: 1;
     display: flex;
     justify-content: center;
@@ -46,12 +49,29 @@ body {
 .link-home {
     flex: 0 1 auto;
     position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-title {
+    display: flex;
+    margin: 20px;
+    font-size: 40px;
+}
+
+.pie-icon {
+    display: flex;
+    width: 60px;
+    height: 60px;
 }
 
 .link-about {
     flex: 0 1 auto;
     margin-left: auto;
     margin-right: 10px;
+    font-size: 20px;
 }
 
 .pie-maker {
@@ -60,13 +80,64 @@ body {
     flex-direction: column;
 }
 
+.input-field {
+    max-width: 500px;
+    text-align: center;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+}
+
+.input-slice-title {
+    width: 100%;
+}
+
+.input-slice-value {
+    width: 110px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.control-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control {
+    margin-top: 20px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.rd3-chart-title {
+    font-size: 45px;
+    text-anchor: middle;
+    text-align: center;
+}
+
 .rd3-basic-chart {
     flex: 0 1 auto;
+    margin-top: 60px;
 }
 
 .about {
     justify-content: center;
     align-items: center;
+    margin: 90px;
+}
+
+.about p {
+    margin: 30px;
+    font-size: 25px;
 }
 
 .footer {
@@ -86,11 +157,6 @@ body {
     background-color: #101820;
 }
 
-.pie-icon {
-    width: 100px;
-    height: 100px;
-    display: solid;
-}
 
 button {
     background-color: #101818;
@@ -101,11 +167,10 @@ button {
     display:inline-block;
     cursor:pointer;
     color:#ffffff;
-    font-size:10px;
-    padding:11px 30px;
     text-decoration:none;
-    width: 100px;
-    height:  25px;
+    width: 140px;
+    height:  40px;
+    font-size: 20px;
 }
 
 button:hover {
@@ -116,3 +181,18 @@ button:active {
     position:relative;
     top:1px;
 }
+
+
+.control-add-reset {
+    display: flex;
+}
+
+.button-add-slice {
+    margin-right: auto;
+}
+
+
+.button-reset-chart {
+    margin-left: auto;
+}
+

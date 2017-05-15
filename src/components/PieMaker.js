@@ -8,26 +8,22 @@ export default class PieChartMaker extends Component {
         super(props)
         this.state = {
             pieChart: {
-                data: [
-                    {label: 'Margarita', value: 20.0, trueValue: 20.0},
-                    {label: 'John', value: 55.0, trueValue: 55.0},
-                    {label: 'Tim', value: 25.0, trueValue: 25.0}
-                ],
-                width: 400,
-                height: 400,
-                radius: 100,
-                innerRadius: 20,
-                title: "Pie Chart"
+                data: [],
+                width: 850,
+                height: 550,
+                radius: 220,
+                innerRadius: 25,
+                title: ''
             },
             input: {
-                label: "",
+                label: '',
                 value: 0,
                 trueValue: 0
             }
         }
     }
 
-    updatePercents(data) {
+    updatePercents(data, percent) {
         const total = R.reduce((p, s) => p+s.trueValue, 0, data)
         const updateSlice = slice => R.set(R.lensProp('value'), Math.round((slice.trueValue / total) * 100), slice)
         const updated = R.map(updateSlice, data)
@@ -40,14 +36,18 @@ export default class PieChartMaker extends Component {
     }
 
     addSlice() {
+        const val = this.state.input.value
+        if(typeof val !== 'number' || isNaN(val)) return
+        // D3 cannot use an empty slice as first slice
+        if(val === 0 && this.state.pieChart.data.length === 0) return
         const updatedSlices = this.updatePercents(R.append(this.state.input, this.state.pieChart.data))
         const newPieChart = R.set(R.lensProp('data'), updatedSlices, this.state.pieChart)
-        this.setState(R.merge(this.state, {pieChart: newPieChart}))
+        this.setState(R.merge(this.state, {pieChart: newPieChart, input: {label: '', value: 0, trueValue: 0}}))
     }
 
     resetChart() {
-        const newPieChart = R.set(R.lensProp('data'), [], this.state.pieChart)
-        this.setState(R.merge(this.state, {pieChart: newPieChart}))
+        const newPieChart = R.merge(this.state.pieChart, {data: [], title: ''})
+        this.setState(R.merge(this.state, {pieChart: newPieChart, input: {label: '', value: 0, trueValue: 0}}))
     }
 
     setInputLabel(e) {
@@ -56,7 +56,7 @@ export default class PieChartMaker extends Component {
 
     setInputValue(e) {
         const val = parseInt(e.target.value)
-        if(val < 0 || val > 100) return
+        if(typeof val !== 'number' || val < 0) return
         const newInput = R.merge(this.state.input, {value: val, trueValue: val})
         this.setState(R.merge(this.state, {input: newInput}))
     }
@@ -65,22 +65,27 @@ export default class PieChartMaker extends Component {
         return (
             <div className='content pie-maker light'>
                 <div className='controls'>
-                    <div>
-                        <input type="text"
+                    <div className='control control-title'>
+                        <input className='input-field input-slice-title' type='text'
+                                placeholder='Chart Title'
+                                onChange={this.setInputTitle.bind(this)}
+                                value={this.state.pieChart.title}/>
+                    </div>
+                    <div className='control control-slice'>
+                        <input className='input-field input-slice-name' type='text'
+                                placeholder='Slice Name'
                                 onChange={this.setInputLabel.bind(this)}
                                 value={this.state.input.label}/>
-                        <input type="number" min="0" max="100"
+                        <input className='input-field input-slice-value' type='number' min='0' max='99999' value=''
+                                placeholder='value'
                                 onChange={this.setInputValue.bind(this)}
                                 value={this.state.input.value}/>
-                        <button onClick={() => {this.addSlice()}}>
-                            Add Slice!
+                    </div>
+                    <div className='control control-add-reset'>
+                        <button className='dark button-add-slice' onClick={this.addSlice.bind(this)}>
+                            Add Slice
                         </button>
-                    </div>
-                    <div>
-                        <input type="text" onChange={this.setInputTitle.bind(this)} value={this.state.pieChart.title}/>
-                    </div>
-                    <div>
-                        <button onClick={() => {this.resetChart()}}>
+                        <button className='dark button-reset-chart' onClick={this.resetChart.bind(this)}>
                             Reset
                         </button>
                     </div>

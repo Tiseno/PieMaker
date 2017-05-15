@@ -4,7 +4,8 @@ export default class About extends Component {
     render () {
         return (
             <div className='content about'>
-                <h1>About this site</h1>
+                <p>A simple web app for creating Pie Charts</p>
+                <p>created using react and react-d3.</p>
             </div>
         )
     }
