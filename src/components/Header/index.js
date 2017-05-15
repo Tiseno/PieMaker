@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import PieIcon from './PieIcon'
+import PieIcon from '../PieIcon'
 
-export default class About extends Component {
+export default class Header extends Component {
     render () {
         return (
             <div className='header dark'>

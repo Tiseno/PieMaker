@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
-import Header from './Header'
-import PieMaker from './PieMaker'
-import About from './About'
+import Header from '../Header'
+import PieMaker from '../PieMaker'
+import About from '../About'
 
 export default class App extends Component {
     render () {
